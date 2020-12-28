@@ -16,10 +16,6 @@ async function setOneDarkProTheme() {
 
 async function setBookmarkExtension() {
   const settings: any = {
-    "workbench.colorCustomizations": {
-			"bookmarks.lineBackground": "#660033AA",
-		},
-	
 		"bookmarks.multicursor.toggleMode": "allLinesAtOnce",
   }
   setSettingsFromObject(settings);
@@ -61,6 +57,7 @@ async function setStandartVSCodeSettings() {
     "editor.wordWrap": "on",
     
     "workbench.colorCustomizations": {
+      "bookmarks.lineBackground": "#660033AA",
       "editorCursor.foreground": "#00FF00",
 			"editorCursor.background": "#000000",
       "terminalCursor.foreground": "#FFFFFF",

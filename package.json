@@ -26,8 +26,13 @@
 			}
 		],
 		"keybindings": [
+			{ "key": "ctrl+`", "command": "workbench.action.terminal.focus"},
+			{ "key": "ctrl+t s", "command": "bookmarks.toggle"},
+			{ "key": "ctrl+t n", "command": "bookmarks.jumpToNext"},
+			{ "key": "ctrl+t p", "command": "bookmarks.jumpToPrevious" },
+			{ "key": "ctrl+q", "command": "-workbench.action.quickOpenView" },
+
 			{ "key": "ctrl+l", "command": "-expandLineSelection", "when": "textInputFocus"},
-			{ "key": "ctrl+w", "command": "-workbench.action.closeActiveEditor" },
 
 			{ "key": "ctrl+x", "command": "-cut","when": "textInputFocus && !eitorReadonly" },
 			{ "key": "ctrl+y", "command": "-editor.action.clipboardPasteAction" },
@@ -81,13 +86,24 @@
 			{ "key": "ctrl+x h", "command": "editor.action.selectAll" },
 			{ "key": "ctrl+x h", "command": "editor.action.selectAll" },
 			
-			{ "key": "backspace", "command": "lrwjs.deleteLeft", "when": "textInputFocus" },
-
 			{ "key": "ctrl+f", "command": "lrwts.cursorRight", "when": "editorFocus" },
 			{ "key": "ctrl+b", "command": "lrwts.cursorLeft", "when": "editorFocus" },
 			{ "key": "ctrl+n", "command": "lrwts.cursorDown", "when": "editorFocus" },
 			{ "key": "ctrl+p", "command": "lrwts.cursorUp", "when": "editorFocus" },
-			{ "key": "ctrl+g", "command": "lrwts.cancelSelection", "when": "editorFocus" }
+			{ "key": "ctrl+g", "command": "lrwts.cancelSelection", "when": "editorFocus" },
+			{ "key": "ctrl+a", "command": "lrwts.cursorLineStart", "when": "editorFocus" },
+			{ "key": "ctrl+e", "command": "lrwts.cursorLineEnd", "when": "editorFocus" },
+			{ "key": "alt+b", "command": "lrwts.cursorWordLeft", "when": "editorFocus" },
+			{ "key": "alt+f", "command": "lrwts.cursorWordRight", "when": "editorFocus" },
+
+			{ "key": "ctrl+w", "command": "--workbench.action.closeActiveEditor" },
+			{ "key": "ctrl+w", "command": "lrwts.closeActiveEditor", "when": "editorFocus" },
+
+			{ "key": "backspace", "command": "lrwts.deleteLeft", "when": "textInputFocus" },
+			{ "key": "ctrl+space", "command": "lrwts.setSelectionMark", "when": "textInputFocus" },
+
+			{ "key": "ctrl+v", "command": "lrwts.cursorPageDown", "when": "textInputFocus" },
+			{ "key": "alt+v", "command": "lrwts.cursorPageUp", "when": "textInputFocus" }
 		]
 	},
 	"scripts": {
