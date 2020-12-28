@@ -97,7 +97,11 @@
 			{ "key": "alt+f", "command": "lrwts.cursorWordRight", "when": "editorFocus" },
 
 			{ "key": "ctrl+w", "command": "--workbench.action.closeActiveEditor" },
-			{ "key": "ctrl+w", "command": "lrwts.closeActiveEditor", "when": "editorFocus" },
+			{ "key": "ctrl+w", "command": "lrwts.clipboardCutAction" },
+			{ "key": "ctrl+y", "command": "lrwts.clipboardPasteAction" },
+			{ "key": "alt+y", "command": "lrwts.clipboardCopyAction" },
+
+			{ "key": "ctrl+x w", "command": "lrwts.closeActiveEditor", "when": "editorFocus" },
 
 			{ "key": "backspace", "command": "lrwts.deleteLeft", "when": "textInputFocus" },
 			{ "key": "ctrl+space", "command": "lrwts.setSelectionMark", "when": "textInputFocus" },
