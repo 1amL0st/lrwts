@@ -15,9 +15,7 @@
 	],
 	"extensionDependencies": [
 		"alefragnani.Bookmarks",
-		"zhuangtongfa.Material-theme",
-		"matklad.rust-analyzer",
-		"PKief.material-icon-theme"
+		"zhuangtongfa.Material-theme"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -28,42 +26,69 @@
 			}
 		],
 		"keybindings": [
-			{
-				"key": "ctrl+`",
-				"command": "workbench.action.terminal.focus"
-			},
-			{
-				"key": "ctrl+t s",
-				"command": "bookmarks.toggle"
-			},
-			{
-				"key": "ctrl+t n",
-				"command": "bookmarks.jumpToNext"
-			},
-			{
-					"key": "ctrl+t p",
-					"command": "bookmarks.jumpToPrevious"
-			},
-			{
-					"key": "ctrl+q",
-					"command": "-workbench.action.quickOpenView"
-			},
-			{
-					"key": "ctrl+shift+space",
-					"command": "-editor.action.triggerParameterHints",
-					"when": "editorHasSignatureHelpProvider && editorTextFocus"
-			},
-			{
-					"key": "ctrl+shift+space",
-					"command": "--editor.action.triggerParameterHints",
-					"when": "editorHasSignatureHelpProvider && editorTextFocus"
-			}
-		],
-		"configuration": {
-			"properties": {
-				"editor.cursorBlinking": true
-			}
-		}
+			{ "key": "ctrl+l", "command": "-expandLineSelection", "when": "textInputFocus"},
+			{ "key": "ctrl+w", "command": "-workbench.action.closeActiveEditor" },
+
+			{ "key": "ctrl+x", "command": "-cut","when": "textInputFocus && !eitorReadonly" },
+			{ "key": "ctrl+y", "command": "-editor.action.clipboardPasteAction" },
+			{ "key": "ctrl+g", "command": "-workbench.action.gotoLine"},
+			{ "key": "ctrl+v", "command": "-editor.action.clipboardPasteAction" },
+
+			{ "key": "ctrl+shift+space", "command": "-editor.action.triggerParameterHints", "when": "editorHasSignatureHelpProvider && editorTextFocus" },
+
+			{ "key": "ctrl+q", "command": "editor.action.triggerParameterHints", "when": "editorHasSignatureHelpProvider && editorTextFocus" },
+
+			{ "key": "ctrl+n", "command": "showNextParameterHint", "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible" },
+			{ "key": "ctrl+p", "command": "showPrevParameterHint", "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible" },
+
+			{ "key": "ctrl+n", "command": "selectNextSuggestion", "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
+			{ "key": "ctrl+p", "command": "selectPrevSuggestion", "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
+
+			{ "key": "ctrl+shift+space", "command": "editor.action.triggerSuggest", "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly" },
+			
+			{"key": "ctrl+n", "command": "list.focusDown", "when": "listFocus && !inputFocus" },
+			{"key": "ctrl+p", "command": "list.focusUp", "when": "listFocus && !inputFocus" },
+
+			{ "key": "alt+w", "command": "editor.action.clipboardCopyAction" },
+			{ "key": "alt+backspace", "command": "deleteWordLeft", "when": "textInputFocus && !editorReadonly" },
+			{ "key": "alt+d", "command": "deleteWordRight", "when": "textInputFocus && !editorReadonly" },
+
+			{ "key": "ctrl+l", "command": "editor.action.deleteLines", "when": "textInputFocus && !editorReadonly" },
+
+			{ "key": "ctrl+x w", "command": "workbench.action.closeActiveEditor" },
+			{ "key": "alt+x", "command": "workbench.action.showCommands" },
+			
+			{ "key": "ctrl+g", "command": "closeFindWidget", "when": "editorFocus && findWidgetVisible" },
+			{ "key": "ctrl+g", "command": "closeParameterHints", "when": "editorFocus && parameterHintsVisible" },
+			{ "key": "ctrl+g", "command": "hideSuggestWidget", "when": "suggestWidgetVisible && textInputFocus" },
+			{ "key": "ctrl+g", "command": "workbench.action.closeQuickOpen", "when": "inQuickOpen" },
+
+			{ "key": "ctrl+c c", "command": "editor.action.commentLine", "when": "editorTextFocus && !editorReadonly" },
+			{ "key": "ctrl+c u", "command": "editor.action.removeCommentLine", "when": "editorTextFocus && !editorReadonly" },
+
+			{ "key": "ctrl+n", "command": "workbench.action.quickOpenNavigateNextInEditorPicker","when": "inQuickOpen" },
+			{ "key": "ctrl+p", "command": "workbench.action.quickOpenNavigatePreviousInFilePicker", "when": "inQuickOpen" },
+
+			{"key": "ctrl+/", "command": "undo"},
+			{"key": "ctrl+s", "command": "actions.find"},
+			
+			{ "key": "alt+g g", "command": "workbench.action.gotoLine", "when": "editorFocus"},
+			{ "key": "alt+g d", "command": "editor.action.revealDefinition",
+				"when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"},
+
+			{ "key": "ctrl+x ctrl+s", "command": "workbench.action.files.save" },
+			{ "key": "ctrl+x ctrl+f", "command": "workbench.action.quickOpen" },
+			{ "key": "ctrl+x h", "command": "editor.action.selectAll" },
+			{ "key": "ctrl+x h", "command": "editor.action.selectAll" },
+			
+			{ "key": "backspace", "command": "lrwjs.deleteLeft", "when": "textInputFocus" },
+
+			{ "key": "ctrl+f", "command": "lrwts.cursorRight", "when": "editorFocus" },
+			{ "key": "ctrl+b", "command": "lrwts.cursorLeft", "when": "editorFocus" },
+			{ "key": "ctrl+n", "command": "lrwts.cursorDown", "when": "editorFocus" },
+			{ "key": "ctrl+p", "command": "lrwts.cursorUp", "when": "editorFocus" },
+			{ "key": "ctrl+g", "command": "lrwts.cancelSelection", "when": "editorFocus" }
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run package",
