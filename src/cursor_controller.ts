@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
+
 import { Controllers } from './controllers';
+import { Utility, TextCommandData } from './utility';
 
 export class CursorController {
 	constructor(context: vscode.ExtensionContext) {
@@ -16,15 +18,11 @@ export class CursorController {
     ]);
 
     commands.forEach((command) => {
-      const cmd =  command.substr(command.indexOf('.') + 1);
-      context.subscriptions.push(vscode.commands.registerTextEditorCommand(
-        command, () => {
-          this.moveCursor(cmd)
-        }
-      ))
+			const cmd =  command.substr(command.indexOf('.') + 1);
+			Utility.registerTextCommand(context, command, () => this.moveCursor(cmd));
 		});
 		
-		vscode.commands.registerTextEditorCommand('lrwts.cursorLineStart', this.cursorLineStart.bind(this));
+		Utility.registerTextCommand(context, 'lrwts.cursorLineStart', this.cursorLineStart.bind(this));
 	}
 
 	async cursorLineStart() {

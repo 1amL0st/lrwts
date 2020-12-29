@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 
+import { Utility } from './utility';
+
 export class EditorEntry {
 	vscodeEditor: vscode.TextEditor;
 	isSelection: boolean;
@@ -25,18 +27,17 @@ export class EditorsControllers {
 		}
 
 		vscode.window.onDidChangeActiveTextEditor((editor) => {
-			console.log('onDidChangeActiveTextEditor, editor = ', editor);
 			if (editor) {
 				this.addNewEditor(editor);
 			}
 		});
 
-		context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.closeActiveEditor', async (editor) => {
+		Utility.registerTextCommand(context, 'lrwts.closeActiveEditor', async (editor: vscode.TextEditor) => {
 			if (editor) {
 				this.removeEditor(editor);
 				vscode.commands.executeCommand('workbench.action.closeActiveEditor');
 			}
-		}));
+		});
 	}
 
 	findEditor(editor: vscode.TextEditor): number {

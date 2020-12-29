@@ -111,7 +111,10 @@
 			{ "key": "ctrl+space", "command": "lrwts.setSelectionMark", "when": "textInputFocus" },
 
 			{ "key": "ctrl+v", "command": "lrwts.cursorPageDown", "when": "textInputFocus" },
-			{ "key": "alt+v", "command": "lrwts.cursorPageUp", "when": "textInputFocus" }
+			{ "key": "alt+v", "command": "lrwts.cursorPageUp", "when": "textInputFocus" },
+
+			{ "key": "alt+s w", "command": "lrwts.addSelectionToNextFindMatch", "when": "editorFocus" },
+			{ "key": "alt+s q", "command": "lrwts.selectBetweenQuotes", "when": "editorFocus" }
 		]
 	},
 	"scripts": {
