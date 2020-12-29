@@ -1,7 +1,3 @@
-/*
-	I also use "PKief.material-icon-theme" icons
-*/
-
 import * as vscode from 'vscode';
 import { initSettings } from './settings';
 import { Controllers } from './controllers';

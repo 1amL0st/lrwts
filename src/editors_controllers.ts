@@ -57,12 +57,14 @@ export class EditorsControllers {
 		}
 	}
 
-	addNewEditor(editor: vscode.TextEditor): boolean {
-		if (this.findEditor(editor) === -1) {
-			this.editors.push(new EditorEntry(editor));
-			return true;
-		} else {
-			return false;
+	addNewEditor(editor: vscode.TextEditor) {
+		let index = this.findEditor(editor);
+		if (index === -1) {
+			let entry = new EditorEntry(editor);
+			this.editors.push(entry);
+			this.active = entry;
+		} {
+			this.active = this.editors[index];
 		}
 	}
 }
