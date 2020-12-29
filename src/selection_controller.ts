@@ -14,11 +14,7 @@ export class SelectionController {
 	}
 
 	async selectBetweenQuotes() {
-		// await this.cancelSelection();
-		vscode.commands.executeCommand('editor.action.nextMatchFindAction', '"').then((result) => {
-			console.log('Something is found!');
-			console.log('Result = ', result);
-		})
+		vscode.window.showInformationMessage('This function is not implemented yet!');
 	}
 
 	async addSelectionToNextFindMatch() {
