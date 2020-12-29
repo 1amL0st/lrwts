@@ -54,7 +54,7 @@ async function setStandartVSCodeSettings() {
 		"editor.scrollbar.horizontal": "hidden",
 		"editor.scrollbar.vertical": "hidden",
 		// "editor.lineNumbers": "off",
-		"editor.glyphMargin": false,
+		// "editor.glyphMargin": false,
     "editor.wordWrap": "on",
     
     "breadcrumbs.enabled": false,
