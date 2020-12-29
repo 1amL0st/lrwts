@@ -78,6 +78,7 @@ async function setStandartVSCodeSettings() {
     "workbench.activityBar.visible": true,
     "editor.tabSize": 2,
     "workbench.sideBar.location": "right",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
   };
   setSettingsFromObject(settings);
 }

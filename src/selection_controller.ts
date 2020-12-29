@@ -11,8 +11,8 @@ export class SelectionController {
 		const editor = Controllers.editors_clr.active;
 		if (editor) {
 			editor.isSelection = false;
+			vscode.commands.executeCommand('cancelSelection');
 		}
-		vscode.commands.executeCommand('cancelSelection');
 	}
 
 	async setSelectionMark() {

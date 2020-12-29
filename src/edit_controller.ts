@@ -15,6 +15,7 @@ export class EditController {
       editor.isSelection = false;
     }
     vscode.commands.executeCommand('deleteLeft')
+    Controllers.selection_clr.cancelSelection();
   }
 
   async clipboardCopyAction() {
@@ -28,7 +29,8 @@ export class EditController {
   }
 
   async clipboardCutAction() {
-    vscode.commands.executeCommand('editor.action.clipboardCutAction');
+    await vscode.commands.executeCommand('editor.action.clipboardCopyAction');
+    await vscode.commands.executeCommand('deleteLeft');
     Controllers.selection_clr.cancelSelection();
   }
 }
