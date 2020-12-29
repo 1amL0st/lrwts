@@ -23,11 +23,4 @@ export class SelectionController {
 			e.selection = new vscode.Selection(e.selection.active.with(), e.selection.active.with());
 		}
 	}
-
-	async update() {
-		const editor = Controllers.editors_clr.active;
-		if (editor && editor?.isSelection) {
-			// const selection = Controllers.editors_clr.active?.vscodeEditor.selection;
-		}
-	}
 }

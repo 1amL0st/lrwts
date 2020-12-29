@@ -70,7 +70,7 @@ export class CursorController {
 			command += 'Select';
 		}
 		await vscode.commands.executeCommand(command).then(() => {
-      Controllers.selection_clr.update();
+      // Controllers.selection_clr.update();
 		});
 	}
 }
