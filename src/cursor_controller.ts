@@ -15,6 +15,8 @@ export class CursorController {
 			'lrwts.cursorWordLeft',
 			'lrwts.cursorPageDown',
 			'lrwts.cursorPageUp',
+			'lrwts.cursorTop',
+			'lrwts.cursorBottom'
     ]);
 
     commands.forEach((command) => {
