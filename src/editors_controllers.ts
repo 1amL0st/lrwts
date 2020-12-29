@@ -7,12 +7,6 @@ export class EditorEntry {
 	constructor(vscodeEditor: vscode.TextEditor) {
 		this.vscodeEditor = vscodeEditor;
 		this.isSelection = false;
-
-		vscode.window.onDidChangeActiveTextEditor((active) => {
-			if (vscodeEditor === active) {
-				console.log('YOUR IN THIS EDITOR!');
-			}
-		});
 	}
 }
 
@@ -31,6 +25,7 @@ export class EditorsControllers {
 		}
 
 		vscode.window.onDidChangeActiveTextEditor((editor) => {
+			console.log('onDidChangeActiveTextEditor, editor = ', editor);
 			if (editor) {
 				this.addNewEditor(editor);
 			}
@@ -59,11 +54,11 @@ export class EditorsControllers {
 
 	addNewEditor(editor: vscode.TextEditor) {
 		let index = this.findEditor(editor);
-		if (index === -1) {
+		if (index == -1) {
 			let entry = new EditorEntry(editor);
 			this.editors.push(entry);
 			this.active = entry;
-		} {
+		} else {
 			this.active = this.editors[index];
 		}
 	}

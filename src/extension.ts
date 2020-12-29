@@ -1,10 +1,11 @@
 import * as vscode from 'vscode';
-import { initSettings } from './settings';
+import { syncSettings } from './settings';
 import { Controllers } from './controllers';
 
 export function activate(context: vscode.ExtensionContext) {
-	initSettings();
 	new Controllers(context);
+
+	context.subscriptions.push(vscode.commands.registerCommand('lrwts.syncSettings', syncSettings));
 }
 
 export function deactivate() {}

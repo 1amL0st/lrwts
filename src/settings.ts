@@ -6,21 +6,6 @@ function setSettingsFromObject(settings: any) {
 	}
 }
 
-async function setOneDarkProTheme() {
-  const settings: any = {
-    "workbench.colorTheme": "One Dark Pro",
-  };
-
-  setSettingsFromObject(settings);
-}
-
-async function setBookmarkExtension() {
-  const settings: any = {
-		"bookmarks.multicursor.toggleMode": "allLinesAtOnce",
-  }
-  setSettingsFromObject(settings);
-}
-
 async function setRustAnalyzerExtension() {
   const settings: any = {
 		"rust-client.channel": "nightly",
@@ -33,29 +18,15 @@ async function setRustAnalyzerExtension() {
 }
 
 async function setExternalExtensionsSettings() {
-  setOneDarkProTheme();
-  setBookmarkExtension();
   setRustAnalyzerExtension();
 }
 
 async function setStandartVSCodeSettings() {
   const settings: any = {
+    "bookmarks.multicursor.toggleMode": "allLinesAtOnce",
+
     "window.zoomLevel": 0,
-    "editor.cursorBlinking": "solid",
-    "editor.cursorStyle": "block",
-    "editor.fontSize": 14,
-		"editor.fontFamily": "Comic Mono",
-	
-		"editor.minimap.enabled": false,
-		"editor.hideCursorInOverviewRuler": true,
-		"editor.scrollbar.horizontal": "hidden",
-		"editor.scrollbar.vertical": "hidden",
-	
-		// "editor.lineNumbers": "off",
-		"editor.glyphMargin": false,
-	
-    "editor.wordWrap": "on",
-    
+
     "workbench.colorCustomizations": {
       "bookmarks.lineBackground": "#660033AA",
       "editorCursor.foreground": "#00FF00",
@@ -66,24 +37,39 @@ async function setStandartVSCodeSettings() {
 			"editor.lineHighlightBackground": "#0a5f002a",
 			"debugIcon.breakpointDisabledForeground": "#ff0000",
 			"editor.selectionHighlightBackground": "#113355",
-			"editor.selectionBackground": "#005555"
+      "editor.selectionBackground": "#005555",
     },
 
     "editor.tokenColorCustomizations": {
 			"comments": "#ecff3e"
     },
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.cursorBlinking": "solid",
+    "editor.cursorStyle": "block",
+    "editor.fontSize": 14,
+		"editor.fontFamily": "Comic Mono",
+		"editor.minimap.enabled": false,
+		"editor.hideCursorInOverviewRuler": true,
+		"editor.scrollbar.horizontal": "hidden",
+		"editor.scrollbar.vertical": "hidden",
+		// "editor.lineNumbers": "off",
+		"editor.glyphMargin": false,
+    "editor.wordWrap": "on",
     
     "breadcrumbs.enabled": false,
-		"editor.renderWhitespace": "all",
+
     "workbench.activityBar.visible": true,
-    "editor.tabSize": 2,
     "workbench.sideBar.location": "right",
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "One Dark Pro",
+
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   };
   setSettingsFromObject(settings);
 }
 
-export function initSettings(): void {
+export function syncSettings(): void {
   setStandartVSCodeSettings();
   setExternalExtensionsSettings();
 }

@@ -18,14 +18,15 @@
 	],
 	"extensionDependencies": [
 		"alefragnani.Bookmarks",
-		"zhuangtongfa.Material-theme"
+		"zhuangtongfa.Material-theme",
+		"PKief.material-icon-theme"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "lrwts.helloWorld",
-				"title": "Hello World"
+				"command": "lrwts.syncSettings",
+				"title": "LRWTS Sync Settings"
 			}
 		],
 		"keybindings": [
