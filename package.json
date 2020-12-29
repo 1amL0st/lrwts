@@ -92,8 +92,8 @@
 			
 			{ "key": "ctrl+f", "command": "lrwts.cursorRight", "when": "editorFocus" },
 			{ "key": "ctrl+b", "command": "lrwts.cursorLeft", "when": "editorFocus" },
-			{ "key": "ctrl+n", "command": "lrwts.cursorDown", "when": "editorFocus" },
-			{ "key": "ctrl+p", "command": "lrwts.cursorUp", "when": "editorFocus" },
+			{ "key": "ctrl+n", "command": "lrwts.cursorDown", "when": "editorFocus && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible" },
+			{ "key": "ctrl+p", "command": "lrwts.cursorUp", "when": "editorFocus && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible" },
 			{ "key": "ctrl+g", "command": "lrwts.cancelSelection", "when": "editorFocus" },
 			{ "key": "ctrl+a", "command": "lrwts.cursorLineStart", "when": "editorFocus" },
 			{ "key": "ctrl+e", "command": "lrwts.cursorLineEnd", "when": "editorFocus" },
