@@ -117,7 +117,10 @@
 			{ "key": "alt+s q", "command": "lrwts.selectBetweenQuotes", "when": "editorFocus" },
 
 			{ "key": "alt+.", "command": "lrwts.cursorBottom", "when": "editorFocus" },
-			{ "key": "alt+,", "command": "lrwts.cursorTop", "when": "editorFocus" }
+			{ "key": "alt+,", "command": "lrwts.cursorTop", "when": "editorFocus" },
+
+			{ "key": "alt+g b", "command": "workbench.action.navigateBack", "when": "editorFocus" },
+			{ "key": "alt+g f", "command": "workbench.action.navigateForward", "when": "editorFocus" }
 		]
 	},
 	"scripts": {
