@@ -4,16 +4,13 @@
 ## Зачем? Небольшое предисловие: ##
 Являюсь казуальным пользователем Emacs(a). Опыт в районе 2-х месяцев использования. За это время успел привыкнуть к его горячим клавишам так, что не могу от них отвыкнуть. В данном расширении я реализовал всё что мне нужно для работы в VSCode.
 
-Зависимости:
-1. "alefragnani.Bookmarks" - используется для закладок
-2. "zhuangtongfa.Material-theme" - 'One Dark Pro' используется в качестве основной темы
-3. "PKief.material-icon-theme" - иконки
-
-Шрифты:   
-1. "Comic Mono" - используется в качестве основного шрифта (https://github.com/dtinth/comic-mono-font)
+## Зависимости: ##
+1. [alefragnani.Bookmarks](https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks "alefragnani.Bookmarks") - используется для закладок
+2. [zhuangtongfa.Material-theme](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme "zhuangtongfa.Material-theme") - 'One Dark Pro' используется в качестве основной темы
+3. [PKief.material-icon-theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme "PKief.material-icon-theme") - иконки
 
 ## Шрифты: ##
-1. "Comic Mono" - используется в качестве основного шрифта (https://github.com/dtinth/comic-mono-font)
+1. [Comic Mono](https://github.com/dtinth/comic-mono-font "Comic Mono") - используется в качестве основного шрифта
 
 ## Изменения: ##
 1. Урезанные (лишь основные) горячие клавиши из Emacs
@@ -54,3 +51,4 @@
 ## TODO ##
 1. Сделать выделение в кавычках умнее (сейчас может не работать во многих случаях, например, если в строке есть другие кавычки)
 2. Редактирование "прямоугольников"
+3. Автоматический вызов Sync Settings после установки расширения
