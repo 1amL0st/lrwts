@@ -34,35 +34,33 @@ export class CursorController {
 
 		let document = vscode.window.activeTextEditor.document;
 
-		let pos = vscode.window.activeTextEditor?.selection.active;
-		if (pos) {
-			pos = pos.with(pos.line, 0);
+		let pos = vscode.window.activeTextEditor.selection.active;
+		pos = pos.with(pos.line, 0);
 
-			let range = new vscode.Range(pos, pos.with(pos.line, pos.character + 1));
-			while (document.validateRange(range))
-			{
-				let symbol = document.getText(range);
-				if (symbol != ' ' && symbol != '\t') {
-					break;
-				}
-				else {
-					range = range.with(range.end, range.end.with(range.end.line, range.end.character + 1));
-				}
+		let range = new vscode.Range(pos, pos.with(pos.line, pos.character + 1));
+		while (document.validateRange(range))
+		{
+			let symbol = document.getText(range);
+			if (symbol != ' ' && symbol != '\t') {
+				break;
 			}
-			
-			const editor = vscode.window.activeTextEditor;
-			let selection_start = new vscode.Position(editor.selection.anchor.line, editor.selection.anchor.character);
-			let selection_end = new vscode.Position(range.end.line, range.end.character - 1);
-
-			if (!Controllers.editors_clr.active?.isSelection) {
-				selection_start = selection_end;
+			else {
+				range = range.with(range.end, range.end.with(range.end.line, range.end.character + 1));
 			}
-
-			editor.selection = new vscode.Selection(
-				selection_start,
-				selection_end
-			);
 		}
+		
+		const editor = vscode.window.activeTextEditor;
+		let selection_start = new vscode.Position(editor.selection.anchor.line, editor.selection.anchor.character);
+		let selection_end = new vscode.Position(range.end.line, range.end.character - 1);
+
+		if (!Controllers.editors_clr.active?.isSelection) {
+			selection_start = selection_end;
+		}
+
+		editor.selection = new vscode.Selection(
+			selection_start,
+			selection_end
+		);
 	}
 
 	async moveCursor(command: string) {

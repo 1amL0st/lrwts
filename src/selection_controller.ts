@@ -14,7 +14,20 @@ export class SelectionController {
 	}
 
 	async selectBetweenQuotes() {
-		vscode.window.showInformationMessage('This function is not implemented yet!');
+		let leftPos = Utility.findLeftQuoteFromCursorPos("\'\"", true);
+		let rightPos = Utility.findRightQuoteFromCursorPos("\'\"", true);
+		if (leftPos && rightPos) {
+			this.selectRangeInActiveTextDocument(new vscode.Range(new vscode.Position(leftPos.line, leftPos.character - 1), rightPos));
+		}
+	}
+
+	async selectRangeInActiveTextDocument(range: vscode.Range) {
+		let editor = vscode.window.activeTextEditor;
+		let editorEntry = Controllers.editors_clr.active;
+		if (editor && editorEntry) {
+			editorEntry.isSelection = true;
+			editor.selection = new vscode.Selection(range.start, range.end);
+		}
 	}
 
 	async addSelectionToNextFindMatch() {

@@ -18,4 +18,54 @@ export class Utility {
   static registerTextCommands(context: vscode.ExtensionContext, commands: Array<TextCommandData>) {
     commands.forEach((command) => Utility.registerTextCommand(context, command.name, command.callback));
   }
+
+  static findLeftQuoteFromCursorPos(symbols: String, include: boolean): vscode.Position | null {
+    if (vscode.window.activeTextEditor) {
+      let document = vscode.window.activeTextEditor.document;
+      let pos = vscode.window.activeTextEditor.selection.active;
+
+      if (!include) {
+        pos = pos.with(pos.line, pos.character - 1);
+      }
+
+      let range = new vscode.Range(pos, pos.with(pos.line, pos.character + 1));
+      while (document.validateRange(range))
+		  {
+        let symbol = document.getText(range);
+        if (symbols.includes(symbol)) {
+          return range.end;
+        }
+        else {
+          let newPos = new vscode.Position(range.start.line, range.start.character - 1);
+          range = new vscode.Range(newPos, range.start);
+        }
+		  }
+		};
+    return null;
+  }
+
+  static findRightQuoteFromCursorPos(symbols: String, include: boolean): vscode.Position | null {
+    if (vscode.window.activeTextEditor) {
+      let document = vscode.window.activeTextEditor.document;
+      let pos = vscode.window.activeTextEditor.selection.active;
+
+      if (!include) {
+        pos = pos.with(pos.line, pos.character - 1);
+      }
+
+      let range = new vscode.Range(pos, pos.with(pos.line, pos.character + 1));
+      while (document.validateRange(range))
+		  {
+        let symbol = document.getText(range);
+        if (symbols.includes(symbol)) {
+          return range.end;
+        }
+        else {
+          let newPos = new vscode.Position(range.end.line, range.end.character + 1);
+          range = new vscode.Range(range.end, newPos);
+        }
+		  }
+		};
+    return null;
+  }
 }
