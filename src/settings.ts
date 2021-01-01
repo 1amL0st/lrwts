@@ -6,22 +6,8 @@ function setSettingsFromObject(settings: any) {
 	}
 }
 
-async function setRustAnalyzerExtension() {
-  const settings: any = {
-		"rust-client.channel": "nightly",
-		"rust-analyzer.callInfo.full": false,
-		"rust-analyzer.inlayHints.chainingHints": false,
-		"rust-analyzer.inlayHints.typeHints": false,
-		"rust-analyzer.inlayHints.parameterHints": false
-  }
-  setSettingsFromObject(settings);
-}
-
-async function setExternalExtensionsSettings() {
-  setRustAnalyzerExtension();
-}
-
 async function setStandartVSCodeSettings() {
+  // LostRay: Maybe i should split this object...
   const settings: any = {
     "bookmarks.multicursor.toggleMode": "allLinesAtOnce",
 
@@ -50,14 +36,15 @@ async function setStandartVSCodeSettings() {
     "editor.fontSize": 14,
 		"editor.fontFamily": "Comic Mono",
 		"editor.minimap.enabled": false,
-		"editor.hideCursorInOverviewRuler": true,
+    "editor.hideCursorInOverviewRuler": true,
+    // NOTE: These two settings looks useless
 		"editor.scrollbar.horizontal": "hidden",
 		"editor.scrollbar.vertical": "hidden",
 		// "editor.lineNumbers": "off",
 		// "editor.glyphMargin": false,
     "editor.wordWrap": "on",
     
-    "breadcrumbs.enabled": false,
+    "breadcrumbs.enabled": true,
 
     "workbench.activityBar.visible": true,
     "workbench.sideBar.location": "right",
@@ -65,15 +52,46 @@ async function setStandartVSCodeSettings() {
     "workbench.colorTheme": "One Dark Pro",
 
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+
+    "todohighlight.keywords": [
+      {
+          "text": "NOTE:",
+          "color": "#fcb358",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "overviewRulerColor": "grey"
+      },
+      {
+          "text": "LostRay:",
+          "color": "#9fff94",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "isWholeLine": false,
+      },
+      {
+          "text": "FIXME:",
+          "color": "#ff1414",
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      {
+          "text": "TODO:",
+          "color": "#ca75ff",
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+
+    ],
+    "todohighlight.defaultStyle": {
+        "color": "#ff8c75",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+
+    "rust-client.channel": "nightly",
+		"rust-analyzer.callInfo.full": false,
+		"rust-analyzer.inlayHints.chainingHints": false,
+		"rust-analyzer.inlayHints.typeHints": false,
+		"rust-analyzer.inlayHints.parameterHints": false
   };
   setSettingsFromObject(settings);
 }
 
 export function syncSettings(context: vscode.ExtensionContext): void {
-  const key = 'lrwtsSettingsSyncKey';
-  if (context.globalState.get(key)) {
-    setStandartVSCodeSettings();
-    setExternalExtensionsSettings();
-    context.globalState.update(key, 'Synchronized!');
-  }
+  setStandartVSCodeSettings();
 }

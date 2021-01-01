@@ -19,7 +19,8 @@
 	"extensionDependencies": [
 		"alefragnani.Bookmarks",
 		"zhuangtongfa.Material-theme",
-		"PKief.material-icon-theme"
+		"PKief.material-icon-theme",
+		"wayou.vscode-todo-highlight"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
