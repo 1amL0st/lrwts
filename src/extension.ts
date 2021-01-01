@@ -4,8 +4,8 @@ import { Controllers } from './controllers';
 
 export function activate(context: vscode.ExtensionContext) {
 	new Controllers(context);
-
-	context.subscriptions.push(vscode.commands.registerCommand('lrwts.syncSettings', syncSettings));
+	syncSettings(context);
+	// context.subscriptions.push(vscode.commands.registerCommand('lrwts.syncSettings', syncSettings));
 }
 
 export function deactivate() {}

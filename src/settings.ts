@@ -69,7 +69,11 @@ async function setStandartVSCodeSettings() {
   setSettingsFromObject(settings);
 }
 
-export function syncSettings(): void {
-  setStandartVSCodeSettings();
-  setExternalExtensionsSettings();
+export function syncSettings(context: vscode.ExtensionContext): void {
+  const key = 'lrwtsSettingsSyncKey';
+  if (context.globalState.get(key)) {
+    setStandartVSCodeSettings();
+    setExternalExtensionsSettings();
+    context.globalState.update(key, 'Synchronized!');
+  }
 }
