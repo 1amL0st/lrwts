@@ -1,6 +1,8 @@
 # LRWTS #
 Расширение для VSCode для меня
 
+![alt text](https://github.com/1amL0st/lrwts/blob/master/showcase/screenshot_1.png?raw=true)
+
 ## Зачем? Небольшое предисловие: ##
 Являюсь казуальным пользователем Emacs(a). Опыт в районе 2-х месяцев использования. За это время успел привыкнуть к его горячим клавишам так, что не могу от них отвыкнуть. В данном расширении я реализовал всё что мне нужно для работы в VSCode.
 
@@ -54,7 +56,7 @@
 - **LostRay:**
 - **FIXME:**
 -  **TODO:**
-Добавить новые слова можно в настройках. Подробности по настройке есть на странице расширения [wayou.vscode-todo-highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight "wayou.vscode-todo-highlight")
+<br/>Добавить новые слова можно в настройках. Подробности по настройке есть на странице расширения [wayou.vscode-todo-highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight "wayou.vscode-todo-highlight")
 
 ## Установка ##
 1. Собираем плагин с помощь "yarn vsce package -o ."
