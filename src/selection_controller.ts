@@ -1,24 +1,64 @@
 import * as vscode from 'vscode';
+import { Position, Range, Selection } from 'vscode';
 
 import { Utility, TextCommandData } from './utility';
 import { Controllers } from './controllers';
 
 export class SelectionController {
+	rectangleDecorator: vscode.TextEditorDecorationType | null;
+	rectangleStyle: any
+
 	constructor(context: vscode.ExtensionContext) {
+		this.rectangleDecorator = null;
+
+		const style = vscode.workspace.getConfiguration('lrwts');
+		const backgroundColor = style.get('selectionRectangleStyle');
+		this.rectangleStyle = (backgroundColor) ? backgroundColor : {
+			backgroundColor: 'red',
+		};
+		// console.log('backgroundColor = ', backgroundColor);
+
 		Utility.registerTextCommands(context, [
 			new TextCommandData('lrwts.cancelSelection', this.cancelSelection.bind(this)),
 			new TextCommandData('lrwts.setSelectionMark', this.setSelectionMark.bind(this)),
 			new TextCommandData('lrwts.selectBetweenQuotes', this.selectBetweenQuotes.bind(this)),
 			new TextCommandData('lrwts.addSelectionToNextFindMatch', this.addSelectionToNextFindMatch.bind(this)),
 			new TextCommandData('lrwts.setMultilineCursor', this.setMultilineCursors.bind(this))
-		])
+		]);
 	}
 
+	async updateSelectionRectangleHighlight() {
+    const editor = Controllers.editors_clr.active;
+    if (editor) {
+			if (!this.rectangleDecorator) {
+				this.rectangleDecorator = vscode.window.createTextEditorDecorationType(this.rectangleStyle);
+			}
+
+			let selectionStart = editor.vscodeEditor.selection.anchor;
+			let selectionEnd = editor.vscodeEditor.selection.active;
+			
+			const startLine = Math.min(selectionStart.line, selectionEnd.line);
+			const endLine = Math.max(selectionStart.line, selectionEnd.line);
+
+			const startChar = Math.min(selectionStart.character, selectionEnd.character);
+			const endChar = Math.max(selectionStart.character, selectionEnd.character);
+
+			let ranges = new Array<Range>(endLine - startLine + 1);
+			for (let i = startLine; i <= endLine; ++i) {
+				ranges[i - startLine] = new Range(new Position(i, startChar), new Position(i, endChar));
+			}
+
+      // ranges.push(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)))
+      editor.vscodeEditor.setDecorations(this.rectangleDecorator, ranges);
+    }
+	}
+
+	// TODO: This function doesn't do anything useful
 	async setMultilineCursors() {
 		const editor = vscode.window.activeTextEditor;
 		if (editor) {
-			editor.selections.push(new vscode.Selection(new vscode.Position(0, 0), new vscode.Position(0, 1)));
-			editor.selections.push(new vscode.Selection(new vscode.Position(1, 0), new vscode.Position(1, 1)));
+			editor.selections.push(new Selection(new Position(0, 0), new Position(0, 1)));
+			editor.selections.push(new Selection(new Position(1, 0), new Position(1, 1)));
 		}
 	}
 
@@ -26,7 +66,8 @@ export class SelectionController {
 		let leftPos = Utility.findLeftQuoteFromCursorPos("\'\"", true);
 		let rightPos = Utility.findRightQuoteFromCursorPos("\'\"", true);
 		if (leftPos && rightPos) {
-			this.selectRangeInActiveTextDocument(new vscode.Range(new vscode.Position(leftPos.line, leftPos.character - 1), rightPos));
+			this.selectRangeInActiveTextDocument(new Range(new Position(leftPos.line, leftPos.character - 1), rightPos));
+			this.updateSelectionRectangleHighlight();
 		}
 	}
 
@@ -36,19 +77,22 @@ export class SelectionController {
 		if (editor && editorEntry) {
 			editorEntry.isSelection = true;
 			editor.selection = new vscode.Selection(range.start, range.end);
+			this.updateSelectionRectangleHighlight();
 		}
 	}
 
 	async addSelectionToNextFindMatch() {
 		await this.setSelectionMark();
 		await vscode.commands.executeCommand('editor.action.addSelectionToNextFindMatch');
+		this.updateSelectionRectangleHighlight();
 	}
 
 	async cancelSelection() {
 		const editor = Controllers.editors_clr.active;
 		if (editor) {
 			editor.isSelection = false;
-			vscode.commands.executeCommand('cancelSelection');
+			await vscode.commands.executeCommand('cancelSelection');
+			this.updateSelectionRectangleHighlight()
 		}
 	}
 
@@ -57,7 +101,7 @@ export class SelectionController {
 		if (editor) {
 			editor.isSelection = true;
 			const e = editor.vscodeEditor;
-			e.selection = new vscode.Selection(e.selection.active.with(), e.selection.active.with());
+			e.selection = new Selection(e.selection.active.with(), e.selection.active.with());
 		}
 	}
 }

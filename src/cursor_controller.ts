@@ -21,7 +21,10 @@ export class CursorController {
 
     commands.forEach((command) => {
 			const cmd =  command.substr(command.indexOf('.') + 1);
-			Utility.registerTextCommand(context, command, () => this.moveCursor(cmd));
+			Utility.registerTextCommand(context, command, async () => {
+				await this.moveCursor(cmd);
+				Controllers.selection_clr.updateSelectionRectangleHighlight();
+			});
 		});
 		
 		Utility.registerTextCommand(context, 'lrwts.cursorLineStart', this.cursorLineStart.bind(this));
@@ -61,14 +64,14 @@ export class CursorController {
 			selection_start,
 			selection_end
 		);
+
+		Controllers.selection_clr.updateSelectionRectangleHighlight();
 	}
 
 	async moveCursor(command: string) {
 		if (Controllers.editors_clr.active?.isSelection) {
 			command += 'Select';
 		}
-		await vscode.commands.executeCommand(command).then(() => {
-      // Controllers.selection_clr.update();
-		});
+		await vscode.commands.executeCommand(command);
 	}
 }

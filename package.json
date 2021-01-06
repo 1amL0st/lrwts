@@ -123,7 +123,10 @@
 			{ "key": "alt+g b", "command": "workbench.action.navigateBack", "when": "editorFocus" },
 			{ "key": "alt+g f", "command": "workbench.action.navigateForward", "when": "editorFocus" },
 
-			{ "key": "alt+s c", "command": "lrwts.setMultilineCursor", "when": "editorFocus" }
+			{ "key": "alt+s c", "command": "lrwts.setMultilineCursor", "when": "editorFocus" },
+			{ "key": "alt+s r", "command": "lrwts.replaceInSelection", "when": "editorFocus" },
+
+			{ "key": "alt+r", "command": "lrwts.rectangleTest", "when": "editorFocus && editorHasSelection" }
 		]
 	},
 	"scripts": {

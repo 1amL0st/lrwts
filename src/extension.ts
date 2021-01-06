@@ -10,7 +10,17 @@ async function onActivateSync(context: vscode.ExtensionContext) {
   }
 }
 
+async function lostTry(context: vscode.ExtensionContext) {
+  const editor = vscode.window.activeTextEditor;
+  if (editor) {
+    const document = editor.document;
+    let text = document.getText();
+    text = "Hello" + text;
+  }
+}
+
 export function activate(context: vscode.ExtensionContext) {
+  lostTry(context);
 	new Controllers(context);
 	onActivateSync(context);
 	context.subscriptions.push(vscode.commands.registerCommand('lrwts.syncSettings', syncSettings));
