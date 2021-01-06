@@ -27,14 +27,19 @@ export class SelectionController {
 	}
 
 	async updateSelectionRectangleHighlight() {
-    const editor = Controllers.editors_clr.active;
+		// const editor = Controllers.editors_clr.active;
+		const editor = vscode.window.activeTextEditor;
     if (editor) {
+			console.log('Update function!');
 			if (!this.rectangleDecorator) {
 				this.rectangleDecorator = vscode.window.createTextEditorDecorationType(this.rectangleStyle);
 			}
 
-			const [startLine, endLine, startChar, endChar] = 
-				Utility.getSelectionRectangleMetrics(editor.vscodeEditor);
+			const [startLine, endLine, startChar, endChar] =
+				Utility.getSelectionRectangleMetrics(editor);
+
+			// console.log(`${startLine} ${endLine} ${startChar} ${endChar}`);
+			// console.log('Editor file name = ', editor.document.fileName);
 
 			let ranges = new Array<Range>(endLine - startLine + 1);
 			for (let i = startLine; i <= endLine; ++i) {
@@ -42,7 +47,7 @@ export class SelectionController {
 			}
 
       // ranges.push(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)))
-      editor.vscodeEditor.setDecorations(this.rectangleDecorator, ranges);
+      editor.setDecorations(this.rectangleDecorator, ranges);
     }
 	}
 

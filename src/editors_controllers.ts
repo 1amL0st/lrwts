@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { TextEditor, ExtensionContext } from 'vscode';
+import { Controllers } from './controllers';
 
 import { Utility } from './utility';
 
@@ -30,6 +31,8 @@ export class EditorsControllers {
 		vscode.window.onDidChangeActiveTextEditor((editor) => {
 			if (editor) {
 				this.addNewEditor(editor);
+				// FIXME: Looks like unstable solution for selection highlight updating!
+				setTimeout(() => Controllers.selection_clr.updateSelectionRectangleHighlight(), 100);
 			}
 		});
 

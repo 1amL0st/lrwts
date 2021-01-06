@@ -12,12 +12,53 @@ export class EditController {
 			new TextCommandData('lrwts.clipboardCopyAction', this.clipboardCopyAction.bind(this)),
 			new TextCommandData('lrwts.deleteLeft', this.deleteLeft.bind(this)),
       new TextCommandData('lrwts.replaceInSelection', this.replaceinSelection.bind(this)),
-      new TextCommandData('lrwts.removeSelectionRectangle', this.removeSelectionRectangle.bind(this))
+      new TextCommandData('lrwts.deleteSelectionRectangle', this.deleteSelectionRectangle.bind(this)),
+      new TextCommandData('lrwts.replaceSelectionRectangle', this.replaceSelectionRectangle.bind(this)),
+      new TextCommandData('lrwts.insertSelectionRectangle', this.insertSelectionRectangle.bind(this)),
 		]);
   }
 
-  async removeSelectionRectangle() {
-    const editor = Controllers.editors_clr.active?.vscodeEditor;
+  async insertSelectionRectangle() {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const strToInsert = await vscode.window.showInputBox({
+        placeHolder: 'Enter text to insert',
+      });
+      if (strToInsert) {
+        const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
+        editor.edit(editorBuilder => {
+          for (let i = startLine; i <= endLine; ++i) {
+            const pos = new Position(i, startChar);
+            editorBuilder.insert(pos, strToInsert);
+          }
+        });
+      }
+    }
+  }
+
+  async replaceSelectionRectangle() {
+    // const editor = Controllers.editors_clr.active?.vscodeEditor;
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const strToReplace = await vscode.window.showInputBox({
+        placeHolder: 'Enter text to replace',
+      });
+      if (strToReplace) {
+        const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
+        editor.edit(editorBuilder => {
+          for (let i = startLine; i <= endLine; ++i) {
+            const range = new Range(new Position(i, startChar), new Position(i, endChar));
+            if (editor.document.getText(range) != "") {
+              editorBuilder.replace(range, strToReplace);
+            }
+          }
+        });
+      }
+    }
+  }
+
+  async deleteSelectionRectangle() {
+    const editor = vscode.window.activeTextEditor;
     if (editor) {
       const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
       editor.edit(editorBuilder => {
@@ -25,7 +66,7 @@ export class EditController {
           const range = new Range(new Position(i, startChar), new Position(i, endChar));
           editorBuilder.delete(range);
         }
-      })
+      });
     }
   }
 

@@ -73,9 +73,9 @@ export class Utility {
 
   /// Returns [startLine, endLine, startChar, endChar]
   static getSelectionRectangleMetrics(editor: vscode.TextEditor): SelectionRectangleMetrics {
-    let selectionStart = editor.selection.anchor;
-    let selectionEnd = editor.selection.active;
-    
+    let selectionStart = editor.selection.start;
+    let selectionEnd = editor.selection.end;
+
     const startLine = Math.min(selectionStart.line, selectionEnd.line);
     const endLine = Math.max(selectionStart.line, selectionEnd.line);
 

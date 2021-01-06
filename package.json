@@ -126,8 +126,9 @@
 			{ "key": "alt+s c", "command": "lrwts.setMultilineCursor", "when": "editorFocus" },
 			{ "key": "alt+s r", "command": "lrwts.replaceInSelection", "when": "editorFocus" },
 
-			{ "key": "alt+r r", "command": "lrwts.removeSelectionRectangle", "when": "editorFocus && editorHasSelection" }
-			
+			{ "key": "alt+r d", "command": "lrwts.deleteSelectionRectangle", "when": "editorFocus && editorHasSelection" },
+			{ "key": "alt+r r", "command": "lrwts.replaceSelectionRectangle", "when": "editorFocus && editorHasSelection" },
+			{ "key": "alt+r i", "command": "lrwts.insertSelectionRectangle", "when": "editorFocus && editorHasSelection" }
 		]
 	},
 	"scripts": {
