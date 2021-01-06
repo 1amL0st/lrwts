@@ -18,3 +18,11 @@ function getHelloWorldString(): string {
 function getX() {
   
 }
+
+/*
+  Sample of rectangle highlight
+  123456789
+  123456789
+  123456789
+  123456789
+*/

@@ -76,7 +76,6 @@ async function setStandartVSCodeSettings() {
           "color": "#ca75ff",
           "backgroundColor": "rgba(0, 0, 0, 0)"
       },
-
     ],
     "todohighlight.defaultStyle": {
         "color": "#ff8c75",
@@ -87,10 +86,7 @@ async function setStandartVSCodeSettings() {
 		"rust-analyzer.callInfo.full": false,
 		"rust-analyzer.inlayHints.chainingHints": false,
 		"rust-analyzer.inlayHints.typeHints": false,
-    "rust-analyzer.inlayHints.parameterHints": false,
-    "lrwts.selectionRectangleStyle": {
-      "backgroundColor": "#9e4163"
-    }
+    "rust-analyzer.inlayHints.parameterHints": false
   };
   setSettingsFromObject(settings);
 }

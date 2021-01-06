@@ -27,10 +27,10 @@ export class SelectionController {
 	}
 
 	async updateSelectionRectangleHighlight() {
-		// const editor = Controllers.editors_clr.active;
+		const cEditor = Controllers.editors_clr.active;
 		const editor = vscode.window.activeTextEditor;
-    if (editor) {
-			console.log('Update function!');
+    if (editor && cEditor?.isSelection) {
+			// console.log('Update function!');
 			if (!this.rectangleDecorator) {
 				this.rectangleDecorator = vscode.window.createTextEditorDecorationType(this.rectangleStyle);
 			}
@@ -90,7 +90,9 @@ export class SelectionController {
 		if (editor) {
 			editor.isSelection = false;
 			await vscode.commands.executeCommand('cancelSelection');
-			this.updateSelectionRectangleHighlight()
+
+			this.rectangleDecorator?.dispose();
+			this.rectangleDecorator = null;
 		}
 	}
 
