@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 
+export type SelectionRectangleMetrics = [number, number, number, number];
+
 export class TextCommandData {
   name: string;
   callback: any;
@@ -67,5 +69,19 @@ export class Utility {
 		  }
 		};
     return null;
+  }
+
+  /// Returns [startLine, endLine, startChar, endChar]
+  static getSelectionRectangleMetrics(editor: vscode.TextEditor): SelectionRectangleMetrics {
+    let selectionStart = editor.selection.anchor;
+    let selectionEnd = editor.selection.active;
+    
+    const startLine = Math.min(selectionStart.line, selectionEnd.line);
+    const endLine = Math.max(selectionStart.line, selectionEnd.line);
+
+    const startChar = Math.min(selectionStart.character, selectionEnd.character);
+    const endChar = Math.max(selectionStart.character, selectionEnd.character);
+
+    return [startLine, endLine, startChar, endChar];
   }
 }

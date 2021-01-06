@@ -1,14 +1,32 @@
 import * as vscode from 'vscode';
+import { ExtensionContext, Range, Position } from 'vscode';
 import { Controllers } from './controllers';
 
+import { Utility, TextCommandData } from './utility';
+
 export class EditController {
-  constructor(context: vscode.ExtensionContext) {
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.clipboardCutAction', this.clipboardCutAction.bind(this)));
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.clipboardPasteAction', this.clipboardPasteAction.bind(this)));
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.clipboardCopyAction', this.clipboardCopyAction.bind(this)));
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.deleteLeft', this.deleteLeft.bind(this)));
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.replaceInSelection', this.replaceinSelection.bind(this)));
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand('lrwts.rectangleTest', this.rectangeTest.bind(this)));
+  constructor(context: ExtensionContext) {
+    Utility.registerTextCommands(context, [
+			new TextCommandData('lrwts.clipboardCutAction', this.clipboardCutAction.bind(this)),
+			new TextCommandData('lrwts.clipboardPasteAction', this.clipboardPasteAction.bind(this)),
+			new TextCommandData('lrwts.clipboardCopyAction', this.clipboardCopyAction.bind(this)),
+			new TextCommandData('lrwts.deleteLeft', this.deleteLeft.bind(this)),
+      new TextCommandData('lrwts.replaceInSelection', this.replaceinSelection.bind(this)),
+      new TextCommandData('lrwts.removeSelectionRectangle', this.removeSelectionRectangle.bind(this))
+		]);
+  }
+
+  async removeSelectionRectangle() {
+    const editor = Controllers.editors_clr.active?.vscodeEditor;
+    if (editor) {
+      const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
+      editor.edit(editorBuilder => {
+        for (let i = startLine; i <= endLine; ++i) {
+          const range = new Range(new Position(i, startChar), new Position(i, endChar));
+          editorBuilder.delete(range);
+        }
+      })
+    }
   }
 
   async replaceinSelection() {
@@ -33,32 +51,6 @@ export class EditController {
           editBuilder.replace(editor.selection, newText)
         });
       }
-    }
-  }
-
-  async rectangeTest() {
-    console.log('Rectangle test!');
-    const decorationType = vscode.window.createTextEditorDecorationType({
-      // borderWidth: '1px',
-      // borderStyle: 'solid',
-      backgroundColor: 'red',
-      // overviewRulerColor: 'blue',
-      // overviewRulerLane: vscode.OverviewRulerLane.Right,
-      // light: {
-      //   // this color will be used in light color themes
-      //   borderColor: 'darkblue'
-      // },
-      // dark: {
-      //   // this color will be used in dark color themes
-      //   borderColor: 'lightblue'
-      // }
-    });
-
-    const editor = Controllers.editors_clr.active;
-    if (editor) {
-      let ranges = new Array<vscode.Range>();
-      ranges.push(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)))
-      editor.vscodeEditor.setDecorations(decorationType, ranges);
     }
   }
 

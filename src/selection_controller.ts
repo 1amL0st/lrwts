@@ -14,9 +14,8 @@ export class SelectionController {
 		const style = vscode.workspace.getConfiguration('lrwts');
 		const backgroundColor = style.get('selectionRectangleStyle');
 		this.rectangleStyle = (backgroundColor) ? backgroundColor : {
-			backgroundColor: 'red',
+			"backgroundColor": "#9e4163"
 		};
-		// console.log('backgroundColor = ', backgroundColor);
 
 		Utility.registerTextCommands(context, [
 			new TextCommandData('lrwts.cancelSelection', this.cancelSelection.bind(this)),
@@ -34,14 +33,8 @@ export class SelectionController {
 				this.rectangleDecorator = vscode.window.createTextEditorDecorationType(this.rectangleStyle);
 			}
 
-			let selectionStart = editor.vscodeEditor.selection.anchor;
-			let selectionEnd = editor.vscodeEditor.selection.active;
-			
-			const startLine = Math.min(selectionStart.line, selectionEnd.line);
-			const endLine = Math.max(selectionStart.line, selectionEnd.line);
-
-			const startChar = Math.min(selectionStart.character, selectionEnd.character);
-			const endChar = Math.max(selectionStart.character, selectionEnd.character);
+			const [startLine, endLine, startChar, endChar] = 
+				Utility.getSelectionRectangleMetrics(editor.vscodeEditor);
 
 			let ranges = new Array<Range>(endLine - startLine + 1);
 			for (let i = startLine; i <= endLine; ++i) {

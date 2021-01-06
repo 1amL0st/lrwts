@@ -1,12 +1,13 @@
 import * as vscode from 'vscode';
+import { TextEditor, ExtensionContext } from 'vscode';
 
 import { Utility } from './utility';
 
 export class EditorEntry {
-	vscodeEditor: vscode.TextEditor;
+	vscodeEditor: TextEditor;
 	isSelection: boolean;
 
-	constructor(vscodeEditor: vscode.TextEditor) {
+	constructor(vscodeEditor: TextEditor) {
 		this.vscodeEditor = vscodeEditor;
 		this.isSelection = false;
 	}
@@ -16,7 +17,7 @@ export class EditorsControllers {
 	editors: Array<EditorEntry>;
 	active: EditorEntry | null;
 
-	constructor(context: vscode.ExtensionContext) {
+	constructor(context: ExtensionContext) {
 		this.editors = new Array();
 		this.active = null;
 
@@ -32,7 +33,7 @@ export class EditorsControllers {
 			}
 		});
 
-		Utility.registerTextCommand(context, 'lrwts.closeActiveEditor', async (editor: vscode.TextEditor) => {
+		Utility.registerTextCommand(context, 'lrwts.closeActiveEditor', async (editor: TextEditor) => {
 			if (editor) {
 				this.removeEditor(editor);
 				vscode.commands.executeCommand('workbench.action.closeActiveEditor');
@@ -40,20 +41,20 @@ export class EditorsControllers {
 		});
 	}
 
-	findEditor(editor: vscode.TextEditor): number {
+	findEditor(editor: TextEditor): number {
 		return this.editors.findIndex((entry) => {
 			return editor.document.uri === entry.vscodeEditor.document.uri;
 		});
 	}
 
-	removeEditor(editor: vscode.TextEditor) {
+	removeEditor(editor: TextEditor) {
 		const index = this.findEditor(editor);
 		if (index !== -1) {
 			this.editors.splice(index, 1);
 		}
 	}
 
-	addNewEditor(editor: vscode.TextEditor) {
+	addNewEditor(editor: TextEditor) {
 		let index = this.findEditor(editor);
 		if (index == -1) {
 			let entry = new EditorEntry(editor);
