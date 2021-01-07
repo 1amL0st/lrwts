@@ -16,32 +16,32 @@ async function setStandartVSCodeSettings() {
     "workbench.colorCustomizations": {
       "bookmarks.lineBackground": "#660033AA",
       "editorCursor.foreground": "#00FF00",
-			"editorCursor.background": "#000000",
+      "editorCursor.background": "#000000",
       "terminalCursor.foreground": "#FFFFFF",
       
       "debugIcon.breakpointForeground": "#ff0000",
-			"editor.lineHighlightBackground": "#0a5f002a",
-			"debugIcon.breakpointDisabledForeground": "#ff0000",
-			"editor.selectionHighlightBackground": "#113355",
+      "editor.lineHighlightBackground": "#0a5f002a",
+      "debugIcon.breakpointDisabledForeground": "#ff0000",
+      "editor.selectionHighlightBackground": "#113355",
       "editor.selectionBackground": "#005555",
     },
 
     "editor.tokenColorCustomizations": {
-			"comments": "#ecff3e"
+      "comments": "#ecff3e"
     },
     "editor.renderWhitespace": "all",
     "editor.tabSize": 2,
     "editor.cursorBlinking": "solid",
     "editor.cursorStyle": "block",
     "editor.fontSize": 14,
-		"editor.fontFamily": "Comic Mono",
-		"editor.minimap.enabled": false,
+    "editor.fontFamily": "Comic Mono",
+    "editor.minimap.enabled": false,
     "editor.hideCursorInOverviewRuler": true,
     // NOTE: These two settings looks useless
-		"editor.scrollbar.horizontal": "hidden",
-		"editor.scrollbar.vertical": "hidden",
-		// "editor.lineNumbers": "off",
-		// "editor.glyphMargin": false,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    // "editor.lineNumbers": "off",
+    // "editor.glyphMargin": false,
     "editor.wordWrap": "on",
     
     "breadcrumbs.enabled": true,
@@ -83,9 +83,9 @@ async function setStandartVSCodeSettings() {
     },
 
     "rust-client.channel": "nightly",
-		"rust-analyzer.callInfo.full": false,
-		"rust-analyzer.inlayHints.chainingHints": false,
-		"rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.callInfo.full": false,
+    "rust-analyzer.inlayHints.chainingHints": false,
+    "rust-analyzer.inlayHints.typeHints": false,
     "rust-analyzer.inlayHints.parameterHints": false
   };
   setSettingsFromObject(settings);
