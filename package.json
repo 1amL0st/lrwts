@@ -128,7 +128,11 @@
 
 			{ "key": "alt+r d", "command": "lrwts.deleteSelectionRectangle", "when": "editorFocus && editorHasSelection" },
 			{ "key": "alt+r r", "command": "lrwts.replaceSelectionRectangle", "when": "editorFocus && editorHasSelection" },
-			{ "key": "alt+r i", "command": "lrwts.insertSelectionRectangle", "when": "editorFocus && editorHasSelection" }
+			{ "key": "alt+r i", "command": "lrwts.insertSelectionRectangle", "when": "editorFocus && editorHasSelection" },
+
+			{ "key": "alt+f", "command": "workbench.action.terminal.focusNextPane", "when": "terminalFocus && terminalProcessSupported" },
+			{ "key": "alt+b", "command": "workbench.action.terminal.focusPreviousPane", "when": "terminalFocus && terminalProcessSupported"
+			}
 		]
 	},
 	"scripts": {
