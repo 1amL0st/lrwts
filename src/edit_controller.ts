@@ -21,16 +21,10 @@ export class EditController {
   async insertSelectionRectangle() {
     const editor = vscode.window.activeTextEditor;
     if (editor) {
-      // editor.selections.push(new Selection(new Position(0, 0), new Position(0, 10)));
-      // editor.selections.push(new Selection(new Position(1, 0), new Position(1, 10)));
-
-      // const strToInsert = await vscode.window.showInputBox({
-      //   placeHolder: 'Enter text to insert',
-      // });
+      const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
+      await Controllers.selection_clr.cancelSelection();
 
       let selections = new Array<Selection>();
-
-      const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
       for (let i = startLine; i <= endLine; ++i) {
         let line_text = editor.document.getText(new Range(new Position(i, startChar), new Position(i, endChar)));
         if (line_text != "") {
@@ -109,8 +103,9 @@ export class EditController {
     if (editor) {
       editor.isSelection = false;
     }
-    vscode.commands.executeCommand('deleteLeft')
-    Controllers.selection_clr.cancelSelection();
+    vscode.commands.executeCommand('deleteLeft');
+    // TODO: This can cause bugs...
+    // Controllers.selection_clr.cancelSelection();
   }
 
   async clipboardCopyAction() {

@@ -7,10 +7,12 @@ import { Utility } from './utility';
 export class EditorEntry {
 	vscodeEditor: TextEditor;
 	isSelection: boolean;
+	multilineSelection: boolean;
 
 	constructor(vscodeEditor: TextEditor) {
 		this.vscodeEditor = vscodeEditor;
 		this.isSelection = false;
+		this.multilineSelection = false;
 	}
 }
 
