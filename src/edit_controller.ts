@@ -29,7 +29,10 @@ export class EditController {
         editor.edit(editorBuilder => {
           for (let i = startLine; i <= endLine; ++i) {
             const pos = new Position(i, startChar);
-            editorBuilder.insert(pos, strToInsert);
+            let line_text = editor.document.getText(new Range(new Position(i, startChar), new Position(i, endChar)));
+            if (line_text != '') {
+              editorBuilder.insert(pos, strToInsert);
+            }
           }
         });
       }
