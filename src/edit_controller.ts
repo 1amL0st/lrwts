@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { ExtensionContext, Range, Position } from 'vscode';
+import { ExtensionContext, Range, Position, Selection } from 'vscode';
 import { Controllers } from './controllers';
 
 import { Utility, TextCommandData } from './utility';
@@ -21,21 +21,27 @@ export class EditController {
   async insertSelectionRectangle() {
     const editor = vscode.window.activeTextEditor;
     if (editor) {
-      const strToInsert = await vscode.window.showInputBox({
-        placeHolder: 'Enter text to insert',
-      });
-      if (strToInsert) {
-        const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
-        editor.edit(editorBuilder => {
-          for (let i = startLine; i <= endLine; ++i) {
-            const pos = new Position(i, startChar);
-            let line_text = editor.document.getText(new Range(new Position(i, startChar), new Position(i, endChar)));
-            if (line_text != '') {
-              editorBuilder.insert(pos, strToInsert);
-            }
-          }
-        });
+      // editor.selections.push(new Selection(new Position(0, 0), new Position(0, 10)));
+      // editor.selections.push(new Selection(new Position(1, 0), new Position(1, 10)));
+
+      // const strToInsert = await vscode.window.showInputBox({
+      //   placeHolder: 'Enter text to insert',
+      // });
+
+      let selections = new Array<Selection>();
+
+      const [startLine, endLine, startChar, endChar] = Utility.getSelectionRectangleMetrics(editor);
+      for (let i = startLine; i <= endLine; ++i) {
+        let line_text = editor.document.getText(new Range(new Position(i, startChar), new Position(i, endChar)));
+        if (line_text != "") {
+          selections.push(new Selection(
+            new Position(i, startChar),
+            new Position(i, startChar + 1)
+          ));
+        }
       }
+
+      editor.selections = selections;
     }
   }
 

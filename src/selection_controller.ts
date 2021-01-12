@@ -3,6 +3,7 @@ import { Position, Range, Selection } from 'vscode';
 
 import { Utility, TextCommandData } from './utility';
 import { Controllers } from './controllers';
+import { ppid } from 'process';
 
 export class SelectionController {
 	rectangleDecorator: vscode.TextEditorDecorationType | null;
@@ -93,6 +94,8 @@ export class SelectionController {
 
 			this.rectangleDecorator?.dispose();
 			this.rectangleDecorator = null;
+
+			await vscode.commands.executeCommand('removeSecondaryCursors');
 		}
 	}
 
