@@ -104,8 +104,7 @@ export class EditController {
       editor.isSelection = false;
     }
     vscode.commands.executeCommand('deleteLeft');
-    // TODO: This can cause bugs...
-    // Controllers.selection_clr.cancelSelection();
+    Controllers.selection_clr.cancelRectangleSelection();
   }
 
   async clipboardCopyAction() {

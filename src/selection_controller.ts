@@ -31,7 +31,6 @@ export class SelectionController {
 		const cEditor = Controllers.editors_clr.active;
 		const editor = vscode.window.activeTextEditor;
     if (editor && cEditor?.isSelection) {
-			// console.log('Update function!');
 			if (!this.rectangleDecorator) {
 				this.rectangleDecorator = vscode.window.createTextEditorDecorationType(this.rectangleStyle);
 			}
@@ -39,15 +38,11 @@ export class SelectionController {
 			const [startLine, endLine, startChar, endChar] =
 				Utility.getSelectionRectangleMetrics(editor);
 
-			// console.log(`${startLine} ${endLine} ${startChar} ${endChar}`);
-			// console.log('Editor file name = ', editor.document.fileName);
-
 			let ranges = new Array<Range>(endLine - startLine + 1);
 			for (let i = startLine; i <= endLine; ++i) {
 				ranges[i - startLine] = new Range(new Position(i, startChar), new Position(i, endChar));
 			}
 
-      // ranges.push(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)))
       editor.setDecorations(this.rectangleDecorator, ranges);
     }
 	}
@@ -86,15 +81,17 @@ export class SelectionController {
 		this.updateSelectionRectangleHighlight();
 	}
 
+	async cancelRectangleSelection() {
+		this.rectangleDecorator?.dispose();
+		this.rectangleDecorator = null;
+	}
+
 	async cancelSelection() {
 		const editor = Controllers.editors_clr.active;
 		if (editor) {
 			editor.isSelection = false;
 			await vscode.commands.executeCommand('cancelSelection');
-
-			this.rectangleDecorator?.dispose();
-			this.rectangleDecorator = null;
-
+			await this.cancelRectangleSelection();
 			await vscode.commands.executeCommand('removeSecondaryCursors');
 		}
 	}
