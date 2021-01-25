@@ -4,26 +4,20 @@ import { Controllers } from './controllers';
 
 async function onActivateSync(context: vscode.ExtensionContext) {
   const key = 'lrwtsSettingsSyncKey';
-  if (context.globalState.get(key)) {
-	  syncSettings(context);
-    context.globalState.update(key, 'Synchronized!');
-  }
-}
 
-async function lostTry(context: vscode.ExtensionContext) {
-  const editor = vscode.window.activeTextEditor;
-  if (editor) {
-    const document = editor.document;
-    let text = document.getText();
-    text = "Hello" + text;
+  const synchronized = 'Synchronized!';
+  const value = context.globalState.get(key);
+
+  if (!value || value !== synchronized) {
+    syncSettings(context);
+    context.globalState.update(key, synchronized);
   }
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  lostTry(context);
-	new Controllers(context);
-	onActivateSync(context);
-	context.subscriptions.push(vscode.commands.registerCommand('lrwts.syncSettings', syncSettings));
+  new Controllers(context);
+  onActivateSync(context);
+  context.subscriptions.push(vscode.commands.registerCommand('lrwts.syncSettings', syncSettings));
 }
 
 export function deactivate() {}
