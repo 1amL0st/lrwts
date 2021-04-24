@@ -6,7 +6,7 @@ function setSettingsFromObject(settings: any) {
 	}
 }
 
-async function setStandartVSCodeSettings() {
+async function setStandardVSCodeSettings() {
   // LostRay: Maybe i should split this object...
   const settings: any = {
     "bookmarks.multicursor.toggleMode": "allLinesAtOnce",
@@ -92,5 +92,5 @@ async function setStandartVSCodeSettings() {
 }
 
 export function syncSettings(context: vscode.ExtensionContext): void {
-  setStandartVSCodeSettings();
+  setStandardVSCodeSettings();
 }
