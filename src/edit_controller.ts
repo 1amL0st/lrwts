@@ -40,7 +40,6 @@ export class EditController {
   }
 
   async replaceSelectionRectangle() {
-    // const editor = Controllers.editors_clr.active?.vscodeEditor;
     const editor = vscode.window.activeTextEditor;
     if (editor) {
       const strToReplace = await vscode.window.showInputBox({
