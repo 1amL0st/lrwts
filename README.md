@@ -12,6 +12,10 @@
 3. [PKief.material-icon-theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme "PKief.material-icon-theme") - иконки
 4. [wayou.vscode-todo-highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight "wayou.vscode-todo-highlight") - подсветка ключевых слов
 
+### Rust: ###
+1. [matklad.rust-analyzer](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer "alefragnani.Bookmarks") - rust-analyzer
+2. [vadimcn.vscode-lldb](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb "alefragnani.Bookmarks") - debugger
+
 ## Шрифты: ##
 1. [Comic Mono](https://github.com/dtinth/comic-mono-font "Comic Mono") - используется в качестве основного шрифта
 
